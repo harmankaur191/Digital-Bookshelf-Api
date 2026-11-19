@@ -1,5 +1,6 @@
 import express from 'express';
 import Book from '../models/Book.js';
+import mongoose from 'mongoose';
 const router =express.Router();
 
 router.post('/', async(req, res)=>{
@@ -27,5 +28,18 @@ router.get('/', async(req, res)=>{
          console.log(e)
     }
 })
+router.get('/:id', async(req, res)=>{
+    try{
+        
+        const response = await Book.findOne({_id: req.params.id});
+        console.log({_id:req.params.id});
+        console.log(response);
+        res.json(response);
+
+    }catch(e){
+        console.log(e+'Error fetching book with id: '+req.params.id);
+    }
+})
+
 
 export default router;
