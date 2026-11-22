@@ -41,5 +41,16 @@ router.get('/:id', async(req, res)=>{
     }
 })
 
+router.get('/:id', async(req, res)=>{
+
+    try{
+        const response = await Book.findByIdAndUpdate({_id:req.params.id});
+        
+    }catch(e){
+
+    }
+
+})
+
 
 export default router;
