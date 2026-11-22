@@ -41,13 +41,20 @@ router.get('/:id', async(req, res)=>{
     }
 })
 
-router.get('/:id', async(req, res)=>{
+router.put('/:id', async(req, res)=>{
 
     try{
-        const response = await Book.findByIdAndUpdate({_id:req.params.id});
+        const response = await Book.findByIdAndUpdate({_id:req.params.id},req.body);
+        if(!response){
+            return res.status(404).json({message:"Item not found!"});
+        }else{
+            console.log(' Book updated successfully');
+        }
+
+        res.json(response);
         
     }catch(e){
-
+        res.status(400).json({message:error.message});
     }
 
 })
